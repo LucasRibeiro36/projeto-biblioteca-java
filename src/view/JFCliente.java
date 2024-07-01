@@ -432,7 +432,7 @@ public class JFCliente extends javax.swing.JFrame {
                     c.setEndereco(jT5Endereco.getText());
                     c.setFone(jT6Fone.getText());
 
-                    BdCliente d = new BdCliente();
+                    BdCliente d = BdCliente.getInstance();
 
                     d.adicionaCliente(c);
 
@@ -482,7 +482,7 @@ public class JFCliente extends javax.swing.JFrame {
     // Lista a quantidade de resultado, de acordo com o nome passado no campo pesquisa
     private void listaContatos() throws SQLException {
         limpaCampos();
-        BdCliente d = new BdCliente();
+        BdCliente d = BdCliente.getInstance();
         clientes = d.getLista("%" + jTPesquisar.getText() + "%"); 
         
         // Após pesquisar os contatos, executa o método p/ exibir o resultado na tabela pesquisa
@@ -542,7 +542,7 @@ public class JFCliente extends javax.swing.JFrame {
                 // Recebe o ID da linha selecionada
                 int id = (int) jTablePesquisa.getValueAt(linhaSelecionada, 0);
                 // Remove o registro, usando como parâmetro, o id da linha selecionada                
-                BdCliente d = new BdCliente();
+                BdCliente d = BdCliente.getInstance();
                 d.remove(id);
 
                 JOptionPane.showMessageDialog(rootPane, "Registro excluido com sucesso.");
@@ -570,7 +570,7 @@ public class JFCliente extends javax.swing.JFrame {
             // Se a confirmação for SIM
             if (resp == JOptionPane.YES_NO_OPTION) {                
                 Cliente c = new Cliente();
-                BdCliente d = new BdCliente();
+                BdCliente d = BdCliente.getInstance();
                 
                 c.setId(Integer.valueOf(jT0Id.getText()));
                 c.setNome(jT1Nome.getText());

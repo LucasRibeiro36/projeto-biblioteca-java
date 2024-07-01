@@ -1,15 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
-/**
- *
- * @author paulojp
- */
 public class Cliente {
+    
+    private static Cliente instance = null;
     
     private int id;
     private String nome;
@@ -19,17 +12,20 @@ public class Cliente {
     private String endereco;
     private String fone;
 
-    public Cliente(String nome, String dataNasc, String sexo, String cpf, String endereco, String fone) {
-        this.nome = nome;
-        this.dataNasc = dataNasc;
-        this.sexo = sexo;
-        this.cpf = cpf;
-        this.endereco = endereco;
-        this.fone = fone;
+    // Construtor privado para evitar instanciação externa
+    private Cliente() {
     }
-    
-     public Cliente() {
-    }  
+
+    // Método estático para obter a instância única do Singleton
+    public static Cliente getInstance() {
+        if (instance == null) {
+            instance = new Cliente();
+        }
+        return instance;
+    }
+
+    // Métodos getter e setter omitidos por brevidade
+    // Você pode mantê-los como estão
 
     public int getId() {
         return id;
@@ -37,8 +33,8 @@ public class Cliente {
 
     public void setId(int id) {
         this.id = id;
-    }    
-    
+    }
+
     public String getNome() {
         return nome;
     }
@@ -85,6 +81,5 @@ public class Cliente {
 
     public void setFone(String fone) {
         this.fone = fone;
-    }  
-    
+    }
 }

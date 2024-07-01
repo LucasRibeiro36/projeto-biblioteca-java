@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package utils;
 
 import java.sql.Connection;
@@ -11,20 +6,25 @@ import java.sql.SQLException;
 
 /**
  *
- * @author paulojp
+ * Classe responsável por criar e fornecer conexões com o banco de dados MySQL.
  */
 public class CriaConexao {
     
+    // Método estático para obter uma conexão com o banco de dados
     public static Connection getConexao() throws SQLException {
-        
         try {
+            // Carrega a classe do driver JDBC
             Class.forName("com.mysql.jdbc.Driver");
-            System.out.println("Conectando ao banco de dados.");
-            return DriverManager.getConnection("jdbc:mysql://localhost/biblioteca", "root", "P9544504");
+            
+            // URL de conexão com o banco de dados (substitua os valores conforme seu ambiente)
+            String url = "jdbc:mysql://localhost/biblioteca";
+            
+            // Faz a conexão com o banco de dados usando usuário e senha
+            return DriverManager.getConnection(url, "root", "P9544504");
         } catch (ClassNotFoundException e) {
-            throw new SQLException(e.getMessage());
+            // Lança uma SQLException caso o driver JDBC não seja encontrado
+            throw new SQLException("Driver MySQL não encontrado", e);
         }   
-        
     }
     
 }

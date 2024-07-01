@@ -1,15 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
-/**
- *
- * @author paulojp
- */
 public class Emprestimo {
+    
+    private static Emprestimo instance = null;
     
     private int id_emprestimo;
     private int id_cliente;
@@ -17,16 +10,20 @@ public class Emprestimo {
     private String data_emprestimo;
     private String data_devolucao;
 
-    public Emprestimo() {
-    }   
-
-    public Emprestimo(int id_emprestimo, int id_cliente, int id_livro, String data_emprestimo, String data_devolucao) {
-        this.id_emprestimo = id_emprestimo;
-        this.id_cliente = id_cliente;
-        this.id_livro = id_livro;
-        this.data_emprestimo = data_emprestimo;
-        this.data_devolucao = data_devolucao;
+    // Construtor privado para evitar instanciação externa
+    private Emprestimo() {
     }
+
+    // Método estático para obter a instância única do Singleton
+    public static Emprestimo getInstance() {
+        if (instance == null) {
+            instance = new Emprestimo();
+        }
+        return instance;
+    }
+
+    // Métodos getter e setter omitidos por brevidade
+    // Você pode mantê-los como estão
 
     public int getId_emprestimo() {
         return id_emprestimo;
@@ -67,5 +64,4 @@ public class Emprestimo {
     public void setData_devolucao(String data_devolucao) {
         this.data_devolucao = data_devolucao;
     }
-    
 }

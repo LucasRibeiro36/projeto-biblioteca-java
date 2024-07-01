@@ -1,29 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
-/**
- *
- * @author paulojp
- */
 public class Multa {
+    
+    private static Multa instance = null;
+    
     private int id_multa;
     private int id_cliente;
     private String descricao;
     private float valor;
 
-    public Multa(int id_multa, int id_emprestimo, String descricao, float valor, String pagamento) {
-        this.id_multa = id_multa;
-        this.id_cliente = id_emprestimo;
-        this.descricao = descricao;
-        this.valor = valor;
+    // Construtor privado para evitar instanciação externa
+    private Multa() {
     }
 
-    public Multa() {
+    // Método estático para obter a instância única do Singleton
+    public static Multa getInstance() {
+        if (instance == null) {
+            instance = new Multa();
+        }
+        return instance;
     }
+
+    // Métodos getter e setter omitidos por brevidade
+    // Você pode mantê-los como estão
 
     public int getId_multa() {
         return id_multa;
@@ -56,5 +55,4 @@ public class Multa {
     public void setValor(float valor) {
         this.valor = valor;
     }
-    
 }

@@ -542,7 +542,7 @@ public class JFEmprestimo extends javax.swing.JFrame {
             // Antes de cadastrar, verifica se os campos foram preenchidos
             if (verificaDados()) {
                 if (verificaDisponibilidadeLivro()) {
-                    BdEmprestimo d = new BdEmprestimo();
+                    BdEmprestimo d = bdEmprestimo.getLista(id);
                     if (!d.verificaMultaCliente(pegaIdCliente())) {
                         try {
                             Emprestimo e = new Emprestimo();
@@ -552,7 +552,7 @@ public class JFEmprestimo extends javax.swing.JFrame {
                             e.setData_emprestimo(salvaDataEmprestimo());
                             e.setData_devolucao(salvaDataDevolucao());
 
-                            d = new BdEmprestimo();
+                            d = bdEmprestimo.getLista(id);
 
                             d.adicionaEmprestimo(e);
 
@@ -703,7 +703,7 @@ public class JFEmprestimo extends javax.swing.JFrame {
     
     // Lista a quantidade de resultado, de acordo com o nome passado no campo pesquisa
     private void listaContatosCliente() throws SQLException {        
-        BdCliente d = new BdCliente();
+        BdCliente d = BdCliente.getInstance();
         clientes = d.getLista("%" + jTPesquisar.getText() + "%"); 
         
         // Após pesquisar os contatos, executa o método p/ exibir o resultado na tabela pesquisa
@@ -748,7 +748,7 @@ public class JFEmprestimo extends javax.swing.JFrame {
     
     // Lista a quantidade de resultado, de acordo com o nome passado no campo pesquisa
     private void listaContatosEmprestimo() throws SQLException { 
-        BdEmprestimo d = new BdEmprestimo();
+        BdEmprestimo d = bdEmprestimo.getLista(id);
         emprestimos = d.getListaPorCliente(pegaIdCliente()); 
         
         // Após pesquisar os contatos, executa o método p/ exibir o resultado na tabela pesquisa
@@ -793,7 +793,7 @@ public class JFEmprestimo extends javax.swing.JFrame {
     
     // Lista a quantidade de resultado, de acordo com o nome passado no campo pesquisa
     private void listaContatosLivro() throws SQLException {
-        BdLivro d = new BdLivro();
+        BdLivro d = BdLivro.getInstance();
         livros = d.getLista("%" + jTPesquisar.getText() + "%"); 
         
         // Após pesquisar os contatos, executa o método p/ exibir o resultado na tabela pesquisa
@@ -853,7 +853,7 @@ public class JFEmprestimo extends javax.swing.JFrame {
                 // Recebe o ID da linha selecionada
                 int id = (int) jTableEmprestimo.getValueAt(linhaSelecionada, 0);
                 // Remove o registro, usando como parâmetro, o id da linha selecionada                
-                BdEmprestimo d = new BdEmprestimo();
+                BdEmprestimo d = bdEmprestimo.getLista(id);
                 d.remove(id);
 
                 JOptionPane.showMessageDialog(rootPane, "Registro excluido com sucesso.");
@@ -877,7 +877,7 @@ public class JFEmprestimo extends javax.swing.JFrame {
     private void alteraDisponibilidade(String status) throws SQLException {
         if ((jTableCliente.getSelectedRow() != -1) || (jTableLivro.getSelectedRow() != -1)) {  
                 Livro l = new Livro();
-                BdLivro d = new BdLivro();             
+                BdLivro d = BdLivro.getInstance();             
                 
                 // Recebe o id do livro, que está sendo exibido no formulário
                 l.setId(Integer.valueOf(pegaIdLivro()));
@@ -920,7 +920,7 @@ public class JFEmprestimo extends javax.swing.JFrame {
             // Recebe o ID da linha selecionada
             int id = (int) jTableEmprestimo.getValueAt(linhaSelecionada, 0);
             // Remove o registro, usando como parâmetro, o id da linha selecionada                
-            BdEmprestimo d = new BdEmprestimo();
+            BdEmprestimo d = bdEmprestimo.getLista(id);
             d.remove(id);         
             
             if (diferencaData() > 0) {

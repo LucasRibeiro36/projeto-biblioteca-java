@@ -1,15 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
-/**
- *
- * @author paulojp
- */
 public class Livro {
+    
+    private static Livro instance = null;
     
     private int id;
     private String exemplar;
@@ -18,18 +11,21 @@ public class Livro {
     private short ano;
     private String disponibilidade;
 
-    public Livro(int id, String exemplar, String autor, byte edicao, short ano, String disponibilidade) {
-        this.id = id;
-        this.exemplar = exemplar;
-        this.autor = autor;
-        this.edicao = edicao;
-        this.ano = ano;
-        this.disponibilidade = disponibilidade;
+    // Construtor privado para evitar instanciação externa
+    private Livro() {
     }
 
-    public Livro() {
-    }   
-    
+    // Método estático para obter a instância única do Singleton
+    public static Livro getInstance() {
+        if (instance == null) {
+            instance = new Livro();
+        }
+        return instance;
+    }
+
+    // Métodos getter e setter omitidos por brevidade
+    // Você pode mantê-los como estão
+
     public int getId() {
         return id;
     }
@@ -76,5 +72,5 @@ public class Livro {
 
     public void setDisponibilidade(String disponibilidade) {
         this.disponibilidade = disponibilidade;
-    }    
+    }
 }

@@ -454,7 +454,7 @@ public class JFMulta extends javax.swing.JFrame {
                 m.setDescricao(desc);
                 m.setValor(Float.valueOf(jT3Valor.getText()));
 
-                BdMulta d = new BdMulta();
+                BdMulta d = BdMulta.getInstance();
 
                 d.adicionaMulta(m);
 
@@ -494,7 +494,7 @@ public class JFMulta extends javax.swing.JFrame {
     
     // Lista a quantidade de resultado, de acordo com o nome passado no campo pesquisa
     private void listaContatosCliente() throws SQLException {        
-        BdCliente d = new BdCliente();
+        BdCliente d = BdCliente.getInstance();
         clientes = d.getLista("%" + jTPesquisar.getText() + "%"); 
         
         // Após pesquisar os contatos, executa o método p/ exibir o resultado na tabela pesquisa
@@ -539,7 +539,7 @@ public class JFMulta extends javax.swing.JFrame {
     
     // Lista a quantidade de resultado, de acordo com o nome passado no campo pesquisa
     private void listaContatosMulta() throws SQLException {         
-        BdMulta d = new BdMulta();
+        BdMulta d = BdMulta.getInstance();
         multas = d.getListaMultaPorCliente(pegaIdCliente()); 
                 
         // Após pesquisar os registros, executa o método p/ exibir o resultado na tabela pesquisa
@@ -565,7 +565,7 @@ public class JFMulta extends javax.swing.JFrame {
             } 
             // Valor Multa Total
             // Recebe o valor total das multas
-            BdMulta m = new BdMulta(); 
+            BdMulta m = BdMulta.getInstance(); 
             String valotTotal = m.totalMultaCliente(pegaIdCliente());
             //Exibe o valor total da soma das multas no campo "Dívida total do cliente: "
             jT4ValorTotal.setText(valotTotal);
@@ -625,7 +625,7 @@ public class JFMulta extends javax.swing.JFrame {
             // Se a confirmação for SIM
             if (resp == JOptionPane.YES_NO_OPTION) {
                 // Remove o registro, usando como parâmetro, o id da linha selecionada                
-                BdMulta d = new BdMulta();
+                BdMulta d = BdMulta.getInstance();
                 d.remove(pegaIdMulta());
 
                 JOptionPane.showMessageDialog(rootPane, "Registro excluido com sucesso.");
@@ -657,7 +657,7 @@ public class JFMulta extends javax.swing.JFrame {
                 // Se a confirmação for SIM
                 if (resp == JOptionPane.YES_NO_OPTION) {
                     // Remove o registro, usando como parâmetro, o id da linha selecionada                
-                    BdMulta d = new BdMulta();
+                    BdMulta d = BdMulta.getInstance();
                     d.removeMultas(pegaIdCliente());
 
                     JOptionPane.showMessageDialog(rootPane, "Pendência sanada com sucesso.");
