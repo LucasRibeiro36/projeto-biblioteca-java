@@ -23,8 +23,7 @@ public class Livro {
         return instance;
     }
 
-    // Métodos getter e setter omitidos por brevidade
-    // Você pode mantê-los como estão
+    
 
     public int getId() {
         return id;
